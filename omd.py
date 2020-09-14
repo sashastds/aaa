@@ -20,12 +20,12 @@ def step1():
     return step2_no_umbrella()
 
 def step2_umbrella():
-    options = {'cats': True, 'dogs': False}
+    options = ['cats', 'dogs']
     option = ''
     moral = 0
     company = Counter()
     while option.lower().strip() not in options:
-        print('is it raining cats or dogs?'.format(*options))
+        print('is it raining cats or dogs?')
         option = input()
     rains = np.random.randint(2)
     if rains:
