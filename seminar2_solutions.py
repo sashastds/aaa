@@ -12,10 +12,9 @@ print([x for x in a if x in b])
 a = [0, 0, 1, 1, 2, 2]
 
 ### solution
-s = set()
-_ = [s.add(x) for x in a]
-s = list(s)
-print(s)
+s = []
+_ = [s.append(x) for x in a if x not in s]
+s
 
 
 #3 Создайте новый массив с четными элементами (ноль считаем нечётным)
@@ -77,5 +76,5 @@ print(c)
 a = {0: 'foo', 1: 'bar', 2: 'baz'}
 
 ### solution
-b = {t[1]:t[0] for t in list(a.items())[::-1]}
+b = {t[1]:t[0] for t in sorted(a.items(), key = lambda x: x[1])[::-1]}
 print(b)
