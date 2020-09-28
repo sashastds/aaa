@@ -13,7 +13,7 @@ class Company():
         self.print_header = self.print_separator.join(['\nDept.', '# Workers', 'Min. Salary', 'Max. Salary', 'Avg. Salary'])
         self.filename = './company_report.csv'
         
-    def add_instance(self, record):
+    def add_instance(self, record: dict) -> None:
         """
         adding new record about worker into Company's structure
         """
@@ -41,7 +41,7 @@ class Company():
         print('\n'.join(sorted(self.departments.keys())))
         
         
-    def get_report(self):
+    def get_report(self) -> None:
         
         """
         prints departments report
@@ -56,7 +56,7 @@ class Company():
                   self.print_separator.join([f'{s:.2f}' for s in stats]))
             
             
-    def write_report(self):
+    def write_report(self) -> None:
         
         """
         writes departments report into csv-file
@@ -77,13 +77,13 @@ class Company():
 
 class Department():
     
-    def __init__(self, name):
+    def __init__(self, name: str):
         
         self.name = name
         self.count = 0
         self.salaries = []
         
-    def add_worker(self, salary):
+    def add_worker(self, salary: float) -> None:
         
         """
         adds worker's salary to Department info
@@ -92,7 +92,7 @@ class Department():
         self.count += 1
         self.salaries.append(salary)
         
-    def get_salary_stats(self):
+    def get_salary_stats(self) -> Tuple:
         
         """ 
         returns min, max and avg salary within department
@@ -102,10 +102,10 @@ class Department():
         
         return min(self.salaries), max(self.salaries), total_salary_volume / self.count
         
-def parse_line(line, main_separator = ';', add_separator = ' -> '):
+def parse_line(line, main_separator: str = ';', add_separator: str = ' -> ') -> Dict:
     
     """
-    parses line from input data into
+    parses line from input data into record's dictionary
     """
     
     name, job, dept, grade, salary =  line.rstrip().split(main_separator)
@@ -129,9 +129,10 @@ def parse_line(line, main_separator = ';', add_separator = ' -> '):
         record['team'] = None
     
     return record
-    
-    
-    def load_data(filepath: Union[str, Path], encoding: str  = 'utf-8'):
+	
+	
+	
+def load_data(filepath: Union[str, Path], encoding: str  = 'utf-8'):
     """
     takes path to file with records in format 
     '
@@ -156,7 +157,10 @@ def parse_line(line, main_separator = ';', add_separator = ' -> '):
             company.add_instance(record)
     
     return company
-    
+	
+	
+	
+	
 DEP_SEP = ' -> '
 FILEPATH = Path('./funcs_homework_employees_sample.csv')
 
