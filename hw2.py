@@ -49,8 +49,8 @@ class Company():
         
         print(self.print_header)
         
-        for dept_name in self.departments:
-            dept = self.departments[dept_name]
+	for dept_name, dept in self.departments.items():
+		
             stats = dept.get_salary_stats()
             print(self.print_separator.join([f'{dept.name :<11}', str(dept.count)]) + self.print_separator +\
                   self.print_separator.join([f'{s:.2f}' for s in stats]))
@@ -66,8 +66,8 @@ class Company():
         
             print(self.csv_header, file = f)
         
-            for dept_name in self.departments:
-                dept = self.departments[dept_name]
+	    for dept_name, dept in self.departments.items():
+			
                 stats = dept.get_salary_stats()
 
                 print(self.csv_separator.join([f'{dept.name:<11}', str(dept.count)]) + self.csv_separator +\
