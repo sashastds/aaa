@@ -13,7 +13,7 @@ class Company():
         self.print_header = self.print_separator.join(['\nDept.', '# Workers', 'Min. Salary', 'Max. Salary', 'Avg. Salary'])
         self.filename = './company_report.csv'
         
-    def add_instance(self, record: dict) -> None:
+    def add_instance(self, record: dict):
         """
         adding new record about worker into Company's structure
         """
@@ -41,7 +41,7 @@ class Company():
         print('\n'.join(sorted(self.departments.keys())))
         
         
-    def get_report(self) -> None:
+    def get_report(self):
         
         """
         prints departments report
@@ -56,7 +56,7 @@ class Company():
                   self.print_separator.join([f'{s:.2f}' for s in stats]))
             
             
-    def write_report(self) -> None:
+    def write_report(self):
         
         """
         writes departments report into csv-file
@@ -83,7 +83,7 @@ class Department():
         self.count = 0
         self.salaries = []
         
-    def add_worker(self, salary: float) -> None:
+    def add_worker(self, salary: float):
         
         """
         adds worker's salary to Department info
