@@ -142,7 +142,7 @@ def load_data(filepath: Union[str, Path], encoding: str  = 'utf-8'):
     Квартальная оценка – результат ревью
     Текущая зарплата
     '
-    
+    and returns Company's instance
     """    
     with open(filepath, 'r', encoding = 'utf-8') as f:
 
@@ -177,7 +177,7 @@ if __name__ == '__main__':
             input_s = int(input_s)
 
         except ValueError:
-            pass
+            print('Please, type value from 1 to 4')
 
         if input_s == 4:
             break
@@ -192,4 +192,4 @@ if __name__ == '__main__':
             company.write_report()
 
         else:
-            pass
+            print('Please, type value from 1 to 4')
