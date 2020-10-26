@@ -1,2 +1,2 @@
-# omd
-avito analytics academy, python, hw1
+# aaa
+avito analytics academy, python course, homeworks / code snippets
