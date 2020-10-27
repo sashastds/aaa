@@ -1,5 +1,4 @@
 import string
-import numpy as np
 import re
 from itertools import chain
 from collections import Counter
@@ -30,10 +29,9 @@ class BaseTokenizer():
         
     def preprocess(self, text: str) -> str:
         """
-        leave input text as is
+        leaves input text as is
         """
         
-        #raise NotImplementedError('preprocessing is not implemented for BaseTokenizer')
         return text
         
     def split(self, text: str) -> List[str]:
@@ -42,12 +40,12 @@ class BaseTokenizer():
         splits 'text' and returns only non-zero lengths chunks in a list
         """
         
-        if len(self._separator) > 0:
+        if self._separator:
             splitted = text.split(self._separator)
         else:
             splitted = list(text)
         
-        return [s for s in splitted if len(s) > 0]
+        return [s for s in splitted if s]
         
             
     def texts_to_sequences(self, texts: List[str]) -> List[List[str]]:
@@ -65,6 +63,9 @@ class Tokenizer(BaseTokenizer):
     might also convert to 'lowercase' if True
     """
     
+    URL_REGEXP = r'https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)'
+    NUM_REGEXP = r'[0-9]{1,}'
+    
     def __init__(self, separator = ' ', punctuation = string.punctuation, lowercase = True):
         
         
@@ -75,17 +76,15 @@ class Tokenizer(BaseTokenizer):
         ### this does not create additional empty strings but might concatenate words like in "hey,you" -> "heyyou"
         #self._translation_table = str.maketrans('', '', self._punctuation)
         
-        ### this doing the reversed thing and e.g. 'what!?really' might become 'what<sep><sep>really'
-        ### but using custom split we fixing it
-        if len(separator) > 0:
+        ### this is doing the reversed thing, e.g. 'what!?really?!' becomes 'what<sep><sep>really<sep><sep>'
+        ### but using custom split where only not empty strings are left we're fixing it
+        if separator:
             self._translation_table = str.maketrans(self._punctuation, separator * len(self._punctuation))
         else:
             self._translation_table = str.maketrans('', '', self._punctuation)
             
         self._lowercase = lowercase
 
-        self.URL_REGEXP = r'https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)'
-        self.NUM_REGEXP = r'[0-9]{1,}'
         
  
     @property
@@ -101,7 +100,7 @@ class Tokenizer(BaseTokenizer):
         self._separator = separator
         self._punctuation = ''.join([s for s in self._punctuation if s!= separator])
         
-        if len(separator) > 0:
+        if separator:
             self._translation_table = str.maketrans(self._punctuation, separator * len(self._punctuation))
         else:
             self._translation_table = str.maketrans('', '', self._punctuation)
@@ -136,20 +135,16 @@ class Tokenizer(BaseTokenizer):
         returns preprocessed text as string 
         """
         
+        
         if self._lowercase:
             
-            text = text.lower()
+            text_cased = text.lower()
+        else:
         
-        text = re.sub(pattern = self.URL_REGEXP, string = text, repl = '')
-        text = re.sub(pattern = self.NUM_REGEXP, string = text, repl = '')  
-        text = text.translate(self._translation_table)
+            text_cased = text
         
-        return text
-    
-    def texts_to_sequences(self, texts: List[str]) -> List[List[str]]:
-        """
-        splits every string in texts into several using separator
-        returns list of lists
-        """        
+        text_cleaned_no_url = re.sub(pattern = self.URL_REGEXP, string = text_cased, repl = '')
+        text_cleaned_no_num = re.sub(pattern = self.NUM_REGEXP, string = text_cleaned_no_url, repl = '')  
+        text_cleaned_no_punct = text_cleaned_no_num.translate(self._translation_table)
         
-        return super().texts_to_sequences(texts)
+        return text_cleaned_no_punct
