@@ -13,6 +13,8 @@ class CountVectorizer():
     size of vocab can not exceed 'max_features' if set
     """
     
+    VOCAB_ORDERINGS = set(['encounter', 'counts', 'alphabetical'])
+    
     def __init__(self, tokenizer, max_features = None):
         
         self._tokenizer = tokenizer
@@ -20,8 +22,6 @@ class CountVectorizer():
         self._feature_names = None
         self._vocab = None
         self._itos = None
-        
-        self.VOCAB_ORDERINGS = set(['encounter', 'counts', 'alphabetical'])
         
     @property
     def tokenizer(self):
@@ -140,7 +140,7 @@ class CountVectorizer():
         
         self._itos = dict(enumerate(selected))
         self._vocab = {v:k for k, v in self._itos.items()}
-        self._feature_names = list(self._vocab.keys())
+        self._feature_names = list(self._vocab)
         
     
     def fit_transform(self, texts: List[str], min_count = 1, min_length = 1, ordering = 'counts',
@@ -187,11 +187,14 @@ class CountVectorizer():
         else:
             
             return vec
-        
+            
     
     def get_feature_names(self):
         
         if self._feature_names is not None:
+            
             return self._feature_names
+        
         else:
+            
             raise AttributeError('vectorizer is not fitted yet - need to fit first')
