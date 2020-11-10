@@ -4,8 +4,9 @@ import re
 from itertools import chain
 from collections import Counter
 from typing import List, Union
+from .transformers import TfidfTransformer
     
-        
+    
 class CountVectorizer():
     
     """
@@ -71,7 +72,6 @@ class CountVectorizer():
     def vocab(self, vocab):
         
         raise AttributeError('cannot set "vocab" like that - only through fit')
-        
         
     def stoi(self, s: str) -> int:
         
@@ -188,7 +188,6 @@ class CountVectorizer():
             
             return vec
             
-    
     def get_feature_names(self):
         
         if self._feature_names is not None:
@@ -198,3 +197,35 @@ class CountVectorizer():
         else:
             
             raise AttributeError('vectorizer is not fitted yet - need to fit first')
+            
+            
+class TfIdfVectorizer(CountVectorizer):
+    
+    def __init__(self, tokenizer, max_features = None):
+        
+        super().__init__(tokenizer, max_features)
+        self.tfidf_transformer = TfidfTransformer()
+        
+    def fit(self, texts: List[str], min_count = 1, min_length = 1, ordering = 'counts'):
+        
+        super(TfIdfVectorizer, self).fit(texts, min_count, min_length, ordering)
+        count_matrix = super(TfIdfVectorizer, self).transform(texts, as_array)
+        
+        self.tfidf_transformer.fit(count_matrix)
+        
+    def transform(self, texts: List[str], as_array = False):
+        
+        count_matrix = super(TfIdfVectorizer, self).transform(texts, as_array)
+        return self.tfidf_transformer.transform(count_matrix)
+        
+    def fit_transform(self, texts: List[str], min_count = 1, min_length = 1, ordering = 'counts',
+                      as_array = False) -> Union[List, np.array]:
+        
+        #count_matrix = super(TfIdfVectorizer, self).fit_transform(texts, min_count, min_length, ordering, as_array)
+        ### тут будет проблема, потому что в fit_transform дергается внутри метод self.fit, который уже перегружен
+        ### здесь для TfIdfVectorizer, а хотелось бы именно родительского класса, поэтому разнесём на два метода
+        
+        super(TfIdfVectorizer, self).fit(texts, min_count, min_length, ordering)
+        count_matrix = super(TfIdfVectorizer, self).transform(texts, as_array)
+        
+        return self.tfidf_transformer.fit_transform(count_matrix)
