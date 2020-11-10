@@ -46,8 +46,7 @@ class BaseTokenizer():
             splitted = list(text)
         
         return [s for s in splitted if s]
-        
-            
+                 
     def texts_to_sequences(self, texts: List[str]) -> List[List[str]]:
         """
         splits every string in texts into several using separator
@@ -68,7 +67,6 @@ class Tokenizer(BaseTokenizer):
     
     def __init__(self, separator = ' ', punctuation = string.punctuation, lowercase = True):
         
-        
         super().__init__(separator)
         
         self._punctuation = ''.join([s for s in punctuation if s!= separator])
@@ -85,8 +83,6 @@ class Tokenizer(BaseTokenizer):
             
         self._lowercase = lowercase
 
-        
- 
     @property
     def separator(self):
         
@@ -125,17 +121,14 @@ class Tokenizer(BaseTokenizer):
         
         raise AttributeError('you cannot reset this attribute as it might conflict with separator - use class constructor')
     
-    
     def preprocess(self, text: str) -> str:
-        
         
         """
         preprocess text using two kind of regexps
         punctuation is also removed after
         returns preprocessed text as string 
         """
-        
-        
+    
         if self._lowercase:
             
             text_cased = text.lower()
