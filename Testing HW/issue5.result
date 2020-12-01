@@ -1,0 +1,22 @@
+============================= test session starts =============================
+platform win32 -- Python 3.7.6, pytest-5.3.5, py-1.8.1, pluggy-0.13.1 -- C:\Anaconda2020\Anaconda3\python.exe
+cachedir: .pytest_cache
+hypothesis profile 'default' -> database=DirectoryBasedExampleDatabase('C:\\Users\\Admin\\Desktop\\aaa\\Semester 1\\Python\\Week 9\\Testing HW\\.hypothesis\\examples')
+rootdir: C:\Users\Admin\Desktop\aaa\Semester 1\Python\Week 9\Testing HW
+plugins: hypothesis-5.5.4, arraydiff-0.3, astropy-header-0.1.2, cov-2.10.1, doctestplus-0.5.0, openfiles-0.4.0, remotedata-0.3.2
+collecting ... collected 3 items
+
+test_issue5.py::test_current_year_getting[dmy] PASSED                    [ 33%]
+test_issue5.py::test_current_year_getting[ymd] PASSED                    [ 66%]
+test_issue5.py::test_current_year_getting[invalid] PASSED                [100%]
+
+----------- coverage: platform win32, python 3.7.6-final-0 -----------
+Name                  Stmts   Miss Branch BrPart  Cover
+-------------------------------------------------------
+test_issue5.py           31      0      2      0   100%
+what_is_year_now.py      19      0      4      0   100%
+-------------------------------------------------------
+TOTAL                    50      0      6      0   100%
+
+
+============================== 3 passed in 0.30s ==============================

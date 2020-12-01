@@ -1,0 +1,18 @@
+============================= test session starts =============================
+platform win32 -- Python 3.7.6, pytest-5.3.5, py-1.8.1, pluggy-0.13.1 -- C:\Anaconda2020\Anaconda3\python.exe
+cachedir: .pytest_cache
+hypothesis profile 'default' -> database=DirectoryBasedExampleDatabase('C:\\Users\\Admin\\Desktop\\aaa\\Semester 1\\Python\\Week 9\\Testing HW\\.hypothesis\\examples')
+rootdir: C:\Users\Admin\Desktop\aaa\Semester 1\Python\Week 9\Testing HW
+plugins: hypothesis-5.5.4, arraydiff-0.3, astropy-header-0.1.2, cov-2.10.1, doctestplus-0.5.0, openfiles-0.4.0, remotedata-0.3.2
+collecting ... collected 8 items
+
+test_issue4.py::test_single_repeated PASSED                              [ 12%]
+test_issue4.py::test_empty_str PASSED                                    [ 25%]
+test_issue4.py::test_single_arg_equal_calls PASSED                       [ 37%]
+test_issue4.py::test_raises_exception_empty_args PASSED                  [ 50%]
+test_issue4.py::test_sequential_numeration_existence[four elements] PASSED [ 62%]
+test_issue4.py::test_sequential_numeration_existence[two elements] PASSED [ 75%]
+test_issue4.py::test_sequential_numeration_absence[four elements] PASSED [ 87%]
+test_issue4.py::test_sequential_numeration_absence[two elements] PASSED  [100%]
+
+============================== 8 passed in 0.18s ==============================

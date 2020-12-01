@@ -1,0 +1,35 @@
+Trying:
+    test_encode(message='SOS')
+Expecting:
+    '... --- ...'
+ok
+Trying:
+    test_encode(message='')
+Expecting:
+    ''
+ok
+Trying:
+    test_encode(message='OSOSO') #doctest: +ELLIPSIS
+Expecting:
+    '---...---'
+ok
+Trying:
+    test_encode(message='SOS' * 20) 
+Expecting:
+    '... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ...
+    ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ...'
+ok
+Trying:
+    test_encode(message='sos')
+Expecting:
+    Traceback (most recent call last):
+    ...
+    KeyError: 's'
+ok
+1 items had no tests:
+    issue1
+1 items passed all tests:
+   5 tests in issue1.test_encode
+5 tests in 2 items.
+5 passed and 0 failed.
+Test passed.
