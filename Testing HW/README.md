@@ -8,5 +8,6 @@ python issue3.py 2> issue3.result
 pytest -v test_issue4.py > issue4.result
 ##### Issue 5 run command
 pytest --cov --cov-branch -v test_issue5.py > issue5.result
+
 coverage html
 
