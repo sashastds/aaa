@@ -1,10 +1,13 @@
-import io
-import pytest
+"""
+tests modules functionality in pizza package
+"""
 
 from functools import reduce
 from itertools import chain
 from operator import add
 from collections import Counter, defaultdict
+import io
+import pytest
 
 from menu import MENU, SIZES_AVAILABLE, Pizza, Margherita, Pepperoni, Hawaiian, Speciale
 
@@ -74,7 +77,7 @@ def test_process_order_can_raise_orderexception(pizza, size):
 )
 def test_process_order_works_correctly(pizza, size, expected):
     actual = process_order(pizza, size)
-    assert {k: v for k, v in expected.items()} == {k: v for k, v in actual.items()}
+    assert dict(expected) == dict(actual)
 
 
 @pytest.mark.parametrize(
@@ -147,12 +150,12 @@ def test_pizza_inequality(size):
 
 
 def test_can_create_dict_from_pizza_instance():
-    EXPECTED = {
+    expected = {
         "dough": 100,
         "mozzarella": 60,
         "tomato sauce": 60,
     }
-    assert dict(Pizza("L")) == EXPECTED
+    assert dict(Pizza("L")) == expected
 
 
 def test_price_doubles():
@@ -160,7 +163,7 @@ def test_price_doubles():
 
 
 def test_can_bake_pizza():
-    assert bake(Pizza()).baked == True
+    assert bake(Pizza()).baked
 
 
 @pytest.mark.parametrize(
@@ -183,21 +186,21 @@ def test_can_bake_pizza():
 def test_checkout(monkeypatch, capsys, amount_paid, message):
     monkeypatch.setattr("sys.stdin", io.StringIO(amount_paid))
     checkout(1000)
-    out, err = capsys.readouterr()
+    out, _ = capsys.readouterr()
     assert message in out
 
 
 def test_can_deliver_with_logs(monkeypatch, capsys):
     monkeypatch.setattr("sys.stdin", io.StringIO("0"))
     deliver(None)
-    out, err = capsys.readouterr()
+    out, _ = capsys.readouterr()
     assert "Доставили" in out
 
 
 def test_can_pickup_with_logs(monkeypatch, capsys):
     monkeypatch.setattr("sys.stdin", io.StringIO("0"))
     pickup(None)
-    out, err = capsys.readouterr()
+    out, _ = capsys.readouterr()
     assert "Забрали" in out
 
 
@@ -277,7 +280,7 @@ def test_can_handle_order_correctly(stash_m3_p2, order_m3_p3_s1, capsys):
     n_margherita = 3
     n_pepperoni = 2
     result = handle_order(order_m3_p3_s1, stash_m3_p2)
-    out, err = capsys.readouterr()
+    out, _ = capsys.readouterr()
 
     assert (
         result[Margherita("L")] == n_margherita
@@ -288,16 +291,13 @@ def test_can_handle_order_correctly(stash_m3_p2, order_m3_p3_s1, capsys):
     )
 
 
-class defaultdict_with_get(defaultdict):
+class DefaultDictWithGet(defaultdict):
     """
     allows to experience actually expected behavior
     when 'safe' method for usual dict .get(key, value) applied to defaultdict
     will return not 'value' but the value with which defaultdict was instantiated
     in defaultdict's implementation this is not the case
     """
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
 
     def get(self, key, default):
         """
@@ -308,7 +308,7 @@ class defaultdict_with_get(defaultdict):
 
 @pytest.fixture
 def stash_unlimited():
-    stash = defaultdict_with_get(lambda: 10000000)
+    stash = DefaultDictWithGet(lambda: 10000000)
     return stash
 
 

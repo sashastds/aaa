@@ -1,13 +1,20 @@
+"""
+implements actions logic with orders
+"""
+
 import time
 import random
 from itertools import chain, repeat
 from collections import defaultdict, Counter
-from typing import Callable, Dict, List, Set, Tuple
+from typing import Callable, Dict, Tuple
 
 from menu import Pizza, MENU, SIZES_AVAILABLE, DEFAULT_SIZE
 
 
 class OrderException(Exception):
+    """
+    custom exception in order not to intercept others by chance
+    """
     pass
 
 
@@ -54,8 +61,7 @@ def validate_order(pizza_type, size=DEFAULT_SIZE, amount=1):
         or (size.upper() not in SIZES_AVAILABLE)
     ):
         return False
-    else:
-        return True
+    return True
 
 
 def process_order(pizza: Tuple[str], size: Tuple[str]):
@@ -81,8 +87,7 @@ def process_order(pizza: Tuple[str], size: Tuple[str]):
             raise OrderException(
                 f'unknown order format - pizza type / size: "{p}" / "{s}", please order again'
             )
-        else:
-            ordered[pizza_type.lower()][s.upper()] += int(amount)
+        ordered[pizza_type.lower()][s.upper()] += int(amount)
     return ordered
 
 
@@ -90,8 +95,8 @@ def take_from_stash(ingredients: Dict[str, int], stash: Dict[str, int]):
     """
     takes specified amount of ingredients from stash
     """
-    for k, v in ingredients.items():
-        stash[k] -= v
+    for key, value in ingredients.items():
+        stash[key] -= value
 
 
 def check_stash(pizza_type: str, size: str, stash: Dict[str, int]):
@@ -106,16 +111,15 @@ def check_stash(pizza_type: str, size: str, stash: Dict[str, int]):
     ingredients = dict(pizza)
 
     enough = True
-    for k, v in ingredients.items():
-        if stash.get(k, 0) - v < 0:
+    for key, value in ingredients.items():
+        if stash.get(key, 0) - value < 0:
             enough = False
             print(f"there is not enough ingredients for another {pizza}")
             break
-    if enough:
-        take_from_stash(ingredients, stash)
-        return pizza
-    else:
+    if not enough:
         return None
+    take_from_stash(ingredients, stash)
+    return pizza
 
 
 def handle_order(ordered: Dict[str, Dict[str, int]], stash: Dict[str, int]):
@@ -131,8 +135,8 @@ def handle_order(ordered: Dict[str, Dict[str, int]], stash: Dict[str, int]):
 
     for pizza_type in ordered:
         for size in ordered[pizza_type]:
-            N = ordered[pizza_type][size]
-            pizza_queue = (check_stash(pizza_type, size, stash) for _ in range(N))
+            amount = ordered[pizza_type][size]
+            pizza_queue = (check_stash(pizza_type, size, stash) for _ in range(amount))
             baking_order.extend(list(filter(lambda x: x, pizza_queue)))
     ready_order = Counter(bake(pizza) for pizza in baking_order)
 

@@ -1,8 +1,8 @@
 ============================= test session starts =============================
 platform win32 -- Python 3.7.6, pytest-5.3.5, py-1.8.1, pluggy-0.13.1 -- C:\Anaconda2020\Anaconda3\python.exe
 cachedir: .pytest_cache
-hypothesis profile 'default' -> database=DirectoryBasedExampleDatabase('C:\\Users\\Admin\\Desktop\\aaa\\Semester 1\\Python\\pizza\\.hypothesis\\examples')
-rootdir: C:\Users\Admin\Desktop\aaa\Semester 1\Python\pizza
+hypothesis profile 'default' -> database=DirectoryBasedExampleDatabase('C:\\Users\\Admin\\Desktop\\aaa\\Semester 1\\Final Project\\.hypothesis\\examples')
+rootdir: C:\Users\Admin\Desktop\aaa\Semester 1\Final Project
 plugins: hypothesis-5.5.4, arraydiff-0.3, astropy-header-0.1.2, cov-2.10.1, doctestplus-0.5.0, openfiles-0.4.0, remotedata-0.3.2
 collecting ... collected 47 items
 
@@ -58,4 +58,4 @@ test_pizza.py::test_can_summarize_order_correctly PASSED                 [100%]
 Coverage HTML written to dir htmlcov
 
 
-============================= 47 passed in 9.81s ==============================
+============================= 47 passed in 9.94s ==============================

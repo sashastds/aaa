@@ -1,9 +1,14 @@
-import click
+"""
+implements cli interface
+"""
+
 from collections import Counter
+
+import click
 
 from actions import process_order, handle_order, deliver, pickup
 from actions import OrderException
-from menu import MENU, SIZES_AVAILABLE, DEFAULT_SIZE
+from menu import MENU, DEFAULT_SIZE
 
 
 INITIAL_AMOUNT = 100
@@ -27,6 +32,9 @@ STASH = Counter(
 
 @click.group()
 def cli():
+    """
+    main's substitute - triggers for all click command set below
+    """
     pass
 
 

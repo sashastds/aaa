@@ -1,3 +1,7 @@
+"""
+defines and implements different pizza classes and their ingredients
+"""
+
 from collections import Counter
 
 SIZES_AVAILABLE = ["L", "XL"]
@@ -43,16 +47,23 @@ class Pizza:
 
     def _scale_price(self, price):
         """
-        scales price due to size
+        scales price according to size
         """
         return price * self._get_scaling_factor()
+
+    @property
+    def _name(self):
+        """
+        returns instance's class name
+        """
+        return type(self).__name__
 
     @property
     def pretty(self):
         """
         returns pretty pizza description with ingredients to display in a menu
         """
-        return f"{type(self).__name__:<10}: {' - '.join(k.capitalize() for k in self.ingredients if k != 'dough')}"
+        return f"{self._name:<10}: {' - '.join(k.capitalize() for k in self.ingredients if k != 'dough')}"
 
     def __str__(self):
         """
@@ -64,7 +75,7 @@ class Pizza:
         """
         returns short pizza representation as class name and size
         """
-        return f"{type(self).__name__} {self.size}"
+        return f"{self._name} {self.size}"
 
     def __iter__(self):
         """
@@ -77,7 +88,7 @@ class Pizza:
         """
         allows to compare two different pizza instances
         """
-        return type(other) == type(self) and dict(self) == dict(other)
+        return type(other) is type(self) and dict(other) == dict(self)
 
     def __hash__(self):
         """
@@ -90,7 +101,7 @@ class Pizza:
 
 class Margherita(Pizza):
     """
-    your simple yet delicious pizza
+    simple, yet delicious pizza
     """
 
     def __init__(self, size: str = DEFAULT_SIZE):
@@ -118,7 +129,7 @@ class Pepperoni(Pizza):
 
 class Hawaiian(Pizza):
     """
-    aloha, brother
+    aloha, brother!
     """
 
     def __init__(self, size: str = DEFAULT_SIZE):
