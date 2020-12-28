@@ -1,0 +1,61 @@
+============================= test session starts =============================
+platform win32 -- Python 3.7.6, pytest-5.3.5, py-1.8.1, pluggy-0.13.1 -- C:\Anaconda2020\Anaconda3\python.exe
+cachedir: .pytest_cache
+hypothesis profile 'default' -> database=DirectoryBasedExampleDatabase('C:\\Users\\Admin\\Desktop\\aaa\\Semester 1\\Python\\pizza\\.hypothesis\\examples')
+rootdir: C:\Users\Admin\Desktop\aaa\Semester 1\Python\pizza
+plugins: hypothesis-5.5.4, arraydiff-0.3, astropy-header-0.1.2, cov-2.10.1, doctestplus-0.5.0, openfiles-0.4.0, remotedata-0.3.2
+collecting ... collected 47 items
+
+test_pizza.py::test_all_hashes_differ PASSED                             [  2%]
+test_pizza.py::test_validate_order[all ok] PASSED                        [  4%]
+test_pizza.py::test_validate_order[bad size] PASSED                      [  6%]
+test_pizza.py::test_validate_order[bad name] PASSED                      [  8%]
+test_pizza.py::test_validate_order[not a bad name] PASSED                [ 10%]
+test_pizza.py::test_validate_order[bad amount0] PASSED                   [ 12%]
+test_pizza.py::test_validate_order[bad amount1] PASSED                   [ 14%]
+test_pizza.py::test_validate_order[bad amount2] PASSED                   [ 17%]
+test_pizza.py::test_process_order_can_raise_orderexception[bad size] PASSED [ 19%]
+test_pizza.py::test_process_order_can_raise_orderexception[bad type] PASSED [ 21%]
+test_pizza.py::test_process_order_can_raise_orderexception[bad size, ok amount spec] PASSED [ 23%]
+test_pizza.py::test_process_order_can_raise_orderexception[bad amount spec] PASSED [ 25%]
+test_pizza.py::test_process_order_works_correctly[pizza0-size0-expected0] PASSED [ 27%]
+test_pizza.py::test_process_order_works_correctly[pizza1-size1-expected1] PASSED [ 29%]
+test_pizza.py::test_process_order_works_correctly[pizza2-size2-expected2] PASSED [ 31%]
+test_pizza.py::test_process_order_works_correctly[pizza3-size3-expected3] PASSED [ 34%]
+test_pizza.py::test_simple_print[L] PASSED                               [ 36%]
+test_pizza.py::test_simple_print[XL] PASSED                              [ 38%]
+test_pizza.py::test_pretty_print[Margherita] PASSED                      [ 40%]
+test_pizza.py::test_pretty_print[Pepperoni] PASSED                       [ 42%]
+test_pizza.py::test_pizza_equality[Speciale] PASSED                      [ 44%]
+test_pizza.py::test_pizza_equality[Hawaiian] PASSED                      [ 46%]
+test_pizza.py::test_pizza_equality[Margherita] PASSED                    [ 48%]
+test_pizza.py::test_pizza_equality[Pepperoni] PASSED                     [ 51%]
+test_pizza.py::test_pizza_inequality_sizes[Speciale] PASSED              [ 53%]
+test_pizza.py::test_pizza_inequality_sizes[Hawaiian] PASSED              [ 55%]
+test_pizza.py::test_pizza_inequality_sizes[Margherita] PASSED            [ 57%]
+test_pizza.py::test_pizza_inequality_sizes[Pepperoni] PASSED             [ 59%]
+test_pizza.py::test_pizza_inequality[L] PASSED                           [ 61%]
+test_pizza.py::test_pizza_inequality[XL] PASSED                          [ 63%]
+test_pizza.py::test_can_create_dict_from_pizza_instance PASSED           [ 65%]
+test_pizza.py::test_price_doubles PASSED                                 [ 68%]
+test_pizza.py::test_can_bake_pizza PASSED                                [ 70%]
+test_pizza.py::test_checkout[exact] PASSED                               [ 72%]
+test_pizza.py::test_checkout[tips] PASSED                                [ 74%]
+test_pizza.py::test_checkout[not enough] PASSED                          [ 76%]
+test_pizza.py::test_checkout[wrong] PASSED                               [ 78%]
+test_pizza.py::test_can_deliver_with_logs PASSED                         [ 80%]
+test_pizza.py::test_can_pickup_with_logs PASSED                          [ 82%]
+test_pizza.py::test_can_take_from_stash[all] PASSED                      [ 85%]
+test_pizza.py::test_can_take_from_stash[partly] PASSED                   [ 87%]
+test_pizza.py::test_can_take_from_stash[none] PASSED                     [ 89%]
+test_pizza.py::test_can_check_stash_correctly[enough] PASSED             [ 91%]
+test_pizza.py::test_can_check_stash_correctly[not enough] PASSED         [ 93%]
+test_pizza.py::test_can_check_stash_correctly[other ingredients] PASSED  [ 95%]
+test_pizza.py::test_can_handle_order_correctly PASSED                    [ 97%]
+test_pizza.py::test_can_summarize_order_correctly PASSED                 [100%]
+
+----------- coverage: platform win32, python 3.7.6-final-0 -----------
+Coverage HTML written to dir htmlcov
+
+
+============================= 47 passed in 9.81s ==============================
