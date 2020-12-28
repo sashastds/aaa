@@ -4,11 +4,15 @@
 #### usage is pretty much explained in pdf-file and also in corresponding help-strings
 just go for a test drive ;)
 
-e.g.:
+some examples:
 ```python pizza.py menu```
+
 ```python pizza.py order --help```
+
 ```python pizza.py order speciale*3 --delivery```
+
 ```python pizza.py order speciale -s XL pepperoni -s L```
+
 ```python pizza.py order speciale pepperoni margherita --size XL --delivery```
 
 
