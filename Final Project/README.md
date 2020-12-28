@@ -18,4 +18,5 @@ some examples:
 
 
 #### you can run tests like this:
-pytest --cov --cov-branch -v test_pizza.py > test.results --cov-report html
+
+```pytest --cov --cov-branch -v test_pizza.py > test.results --cov-report html```
